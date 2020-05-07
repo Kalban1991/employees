@@ -85,16 +85,49 @@
     * Build React-Router part again
     * Research what kind graph libraries for React?
 
+# Day 6 - 5/4/2020
+
+* What we do
+    * Chart
+
+* What we practiced?
+    * Overflow content
+    * Passing Data
+
+* What we learned?
+    * React Router
+    * Passing data with react-router
+    * Installing/Using third party libraries
+
+## Homework
+    * Build React-Router part again
+    * Research what kind graph libraries for React?
+
+# Day 8 - 5/6/2020
+
+* What we do
+
+* What we practiced?
+    * Bootstrap in React
+    * Pagination
+
+* What we learned?
+    * SASS, CSS modules
+    * Classname library
+
+## Homework
+    * Build pagination to show only 5 pages. 2 from left 2 from right of currentpage
+
 
 
 ## Desired Features
     * Sort - Done
     * Pagination - Done
-    * CRUD app
     * Single User Component - Done
-    * Add Graph - Login History
-    * Add new libraries (sass, bootstrap, react-router)
+    * Add Graph - Login History - Done
+    * Add new libraries (sass, bootstrap, react-router) - Done
     * Redux
+    * CRUD app
     * Add Backend
     * Testing
     *Test editing
