@@ -1,0 +1,50 @@
+@import '../../variables.scss';
+
+.page {
+    display: inline-block;
+    padding: 8px;
+    border-right: solid 1px;
+    cursor: pointer;
+    &:hover {
+        background-color: $primary-color;
+    }
+    &.active {
+        background-color: grey;
+        color: white;
+        font-weight: bold;
+    }
+}
+
+.list {
+    box-shadow: $border $border $border $border #333;
+    margin-bottom: 20px;
+
+   
+
+    .row {
+        border-bottom: solid 1px $primary-color;
+        display: inline-block;
+        &:hover {
+            background-color: $primary-color;
+            cursor: pointer;
+        }
+        &.header {
+            font-weight: bold;
+            background-color: $primary-color;
+        }
+
+        .cell {
+            display: inline-block;
+            width: 180px;
+            padding: 10px;
+            box-sizing: border-box;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #333;
+            &.sm {
+                width: 60px;
+                padding: 10px;
+            }
+        }
+    }
+}

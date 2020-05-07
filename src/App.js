@@ -1,12 +1,24 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 import React, { Component } from "react";
 import List from "./components/list/List";
 import Search from "./components/search/Search";
 import "./app.css";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Single from "./components/single/Single";
+<<<<<<< HEAD
 
 class App extends Component {
   constructor() {
+=======
+
+
+class App extends Component {
+  constructor() {
+    console.log("constructor");
+>>>>>>> master
     super();
     this.state = {
       employees: [],
@@ -41,7 +53,10 @@ class App extends Component {
 
   filter = () => {
     const { employees, search, searchBy } = this.state;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
     const filteredEmployees = employees.filter((employee) => {
       return searchBy.length
         ? employee[searchBy].toLowerCase().includes(search.toLowerCase())
@@ -51,7 +66,10 @@ class App extends Component {
   };
 
   render() {
+<<<<<<< HEAD
     console.log("employees", employees);
+=======
+>>>>>>> master
     const { isLoading, search, searchBy, selected, employees } = this.state;
 
     // Filtering / Searching by

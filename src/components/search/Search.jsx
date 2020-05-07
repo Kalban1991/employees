@@ -1,12 +1,12 @@
 import React from 'react';
-import './search.css'
+import { search, select } from './search.module.scss';
 
 const Search = (props) => {
     const {value, searchBy, getSearch, selectOnChange} = props;
     return (
         <div>
-            <input value={value} onChange={getSearch} className="search" placeholder="Search..." />
-            <select value={searchBy} onChange={selectOnChange} className="select">
+            <input value={value} onChange={getSearch} className={search} placeholder="Search..." />
+            <select value={searchBy} onChange={selectOnChange} className={select}>
                 { !searchBy.length && <option value="">Select</option>}
                 <option value="first_name">Name</option>
                 <option value="last_name">Lastname</option>
