@@ -51,7 +51,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("Marats change", employees);
+    console.log("employees", employees);
     const { isLoading, search, searchBy, selected, employees } = this.state;
 
     // Filtering / Searching by
