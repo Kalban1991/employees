@@ -70,6 +70,18 @@
 # Day 5 - 5/4/2020
 
 * What we do
+    * Pagination - 1
+
+* What we practiced?
+    * Pagination
+    * Calculation
+
+* What we learned?
+    * Pagination
+
+# Day 6 - 5/4/2020
+
+* What we do
     * Single User Component
 
 * What we practiced?
@@ -85,7 +97,7 @@
     * Build React-Router part again
     * Research what kind graph libraries for React?
 
-# Day 6 - 5/4/2020
+# Day 7 - 5/4/2020
 
 * What we do
     * Chart
@@ -106,6 +118,8 @@
 # Day 8 - 5/6/2020
 
 * What we do
+    * Added sass
+    * Added Pagination
 
 * What we practiced?
     * Bootstrap in React
@@ -117,6 +131,42 @@
 
 ## Homework
     * Build pagination to show only 5 pages. 2 from left 2 from right of currentpage
+
+# Day 9 - 5/13/2020
+
+* What we do
+    * Used urls for each employee
+    * Used url params as initial state
+
+* What we practiced?
+    * React-Router
+    * withRouter
+    * event bubbling
+
+* What we learned?
+    * Preventing Default for an event
+
+## Homework
+    * Build pagination to show only 5 pages. 2 from left 2 from right of currentpage
+
+# Day 10 - 5/14/2020
+
+* What we do
+    * Added Reactstrap into a project
+    * Added Modal view
+
+* What we practiced?
+    * Bootstrap
+    * Reactstrap
+    * Modal
+
+* What we learned?
+    * Modal
+    * componendWillReceiveProps
+    * Update state when props gets change
+
+## Homework
+    * Make editable inside modal
 
 
 

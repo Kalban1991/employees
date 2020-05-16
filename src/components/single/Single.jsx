@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
 import moment from 'moment';
+import { Button } from 'reactstrap';
 import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
+import Edit from './Edit';
 
 import './single.css'
 
 class Single extends Component {
+constructor(){
+    super()
+    this.state = {
+        editMode: false
+    }
+}
+
+onEdit = () => this.setState({editMode:true})
+onCancel = () => this.setState({editMode:false})
+
     render(){
         const {id} = this.props.match.params;
         const { employees } = this.props;
+        const { editMode } = this.state;
 
         let employee = { logins: [] };
         for(let i=0;i<employees.length; i++){
@@ -30,10 +43,14 @@ class Single extends Component {
         const data = Object.keys(months).map(month=>{
             return {month, login: months[month]}
         })
-        console.log('data',data)
         return (
              <div className="single">
+                 <Edit employee={employee} editMode={editMode} onCancel={this.onCancel}/>
                     <ul>
+                        <li>
+                            <div className="property">Action</div>
+                            <Button onClick={this.onEdit} color="primary">Edit</Button>
+                        </li>
                         <li>
                             <div className="property">Id</div>
                             <div className="value">{employee.id}</div>
@@ -59,12 +76,6 @@ class Single extends Component {
                             <div className="value">{employee.email}</div>
                         </li>
                     </ul>
-                    <div className="input-group">
-  <div className="input-group-prepend">
-    <span className="input-group-text">With textarea</span>
-  </div>
-  <textarea className="form-control" aria-label="With textarea"></textarea>
-</div>
                     <div className="chart">
                     <BarChart width={800} height={300} data={data}
                                 margin={{top: 5, right: 30, left: 20, bottom: 5}}>

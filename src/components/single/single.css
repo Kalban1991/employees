@@ -4,3 +4,12 @@
 .single .property {
     width: 100px;
 }
+.btn {
+    border: solid 1px #cecece;
+    padding: 8px;
+    margin: 3px;
+    cursor: pointer;
+}
+.btn:hover {
+    background-color: aquamarine;
+}

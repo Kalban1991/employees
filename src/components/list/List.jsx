@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import './list.scss'
 import { Link }  from 'react-router-dom';
+import { withRouter }  from 'react-router';
 
 class List extends Component {
     constructor(props){
         super();
+        const page = Number(props.match.params.page);
+        const currentPage = !isNaN(page) ? page : 1
         this.state = {
             limit: 20,
-            currentPage: 6
+            currentPage
         }
     }
 
     setPage = (currentPage) => {
         this.setState({currentPage})
+    }
+    delete = (id,e) => {
+        e.preventDefault(); // Prevents event to redirect using links(a)
+        this.props.delete(id)
     }
 
     render(){
@@ -43,7 +50,7 @@ class List extends Component {
                         {
                             pages.map((item,ind)=>{
                                 const cl = {page:true, active:ind+1 === currentPage}
-                                return <div onClick={()=>this.setPage(ind+1)} className={classNames(cl)} >{ind+1}</div>
+                                return <Link  onClick={()=>this.setPage(ind+1)} to={`/page/${ind+1}`} className={classNames(cl)} >{ind+1}</Link>
                             })
                         }
                         <div onClick={()=>this.setPage(currentPage+1)} className="page" >Next</div>
@@ -56,6 +63,7 @@ class List extends Component {
                         <div className="cell">Email</div>
                         <div className="cell">City</div>
                         <div className="cell">State</div>
+                        <div className="cell">Action</div>
                     </div>
                     <div className="content">
                         {
@@ -63,11 +71,12 @@ class List extends Component {
                                 const { id, first_name, last_name, email, city, state } = employee;
                                 return (
                                 <Link key={id} className="row" to={`/employee/${id}`}>
-                                    <div className="cell sm">{ind+1}</div>
+                                    <div className="cell sm">{id}</div>
                                     <div className="cell">{first_name} {last_name}</div>
-                                    <div title={email} className="cell">{email}</div>
+                                    <div onClick={(e)=>e.preventDefault()} title={email} className="cell">{email}</div>
                                     <div className="cell">{city}</div>
                                     <div className="cell">{state}</div>
+                                    <div className="cell delete" onClick={(e)=>this.delete(id,e)}>Delete</div>
                                 </Link>
                                 )
                             })
@@ -79,4 +88,4 @@ class List extends Component {
     }
 }
 
-export default List
+export default withRouter(List)
