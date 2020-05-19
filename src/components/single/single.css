@@ -1,15 +1,16 @@
-.single .property, .single .value {
-    display: inline-block
+.single .property,
+.single .value {
+  display: inline-block;
 }
 .single .property {
-    width: 100px;
+  width: 100px;
 }
 .btn {
-    border: solid 1px #cecece;
-    padding: 8px;
-    margin: 3px;
-    cursor: pointer;
+  border: solid 1px #cecece;
+  padding: 8px;
+  margin: 3px;
+  cursor: pointer;
 }
 .btn:hover {
-    background-color: aquamarine;
+  background-color: aquamarine;
 }
