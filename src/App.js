@@ -1,11 +1,10 @@
-
 import React, { Component } from "react";
 import List from "./components/list/List";
 import Search from "./components/search/Search";
-import "./app.css";
+import "./app.scss";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Single from "./components/single/Single";
-
+import Edit from "./components/single/edit";
 
 class App extends Component {
   constructor() {
@@ -16,35 +15,25 @@ class App extends Component {
       isLoading: false,
       searchBy: "",
       search: "",
-      selected: {},
     };
   }
 
-<<<<<<< HEAD
+  delete = (id) => {
+    const employees = this.state.employees.filter((emp) => {
+      if (emp.id === id) {
+        return false;
+      }
+      return true;
+    });
+    this.setState({ employees });
+  };
+
   getApiData = () => {
     this.setState({ isLoading: true });
     fetch("https://raw.githubusercontent.com/maratgaip/json/master/people.json")
       .then((json) => json.json())
       .then((employees) => this.setState({ employees, isLoading: false }));
   };
-=======
-    delete =(id) => {
-        const employees = this.state.employees.filter(emp=>{
-            if(emp.id === id){
-                return false
-            }
-            return true
-        })
-        this.setState({employees})
-    }
-
-    getApiData = () => {
-        this.setState({isLoading:true})
-        fetch('https://raw.githubusercontent.com/maratgaip/json/master/people.json')
-        .then(json=>json.json())
-        .then(employees=>this.setState({employees, isLoading:false}))
-    }
->>>>>>> 3e0f4d8b6ac6b6e97432c6915ffdf2cae81c855b
 
   componentDidMount() {
     this.getApiData();
@@ -54,21 +43,22 @@ class App extends Component {
     this.setState({ search: e.target.value });
   };
 
-<<<<<<< HEAD
-  selectOnChange = (e) => {
-    this.setState({ searchBy: e.target.value });
+  selectOnChange = (searchBy) => {
+    this.setState({ searchBy });
   };
   setEmployee = (selected) => {
     this.setState({ selected });
   };
-=======
-    selectOnChange = (searchBy) => {
-        this.setState({searchBy});
-    }
-    setEmployee = (selected) => {
-        this.setState({selected});
-    }
->>>>>>> 3e0f4d8b6ac6b6e97432c6915ffdf2cae81c855b
+
+  updateEmployee = (employee) => {
+    const employees = this.state.employees.map((emp) => {
+      if (emp.id === employee.id) {
+        return employee;
+      }
+      return emp;
+    });
+    this.setState({ employees });
+  };
 
   filter = () => {
     const { employees, search, searchBy } = this.state;
@@ -77,47 +67,25 @@ class App extends Component {
         ? employee[searchBy].toLowerCase().includes(search.toLowerCase())
         : true;
     });
+    console.log("filtered ", filteredEmployees);
     return filteredEmployees;
   };
 
   render() {
     const { isLoading, search, searchBy, selected, employees } = this.state;
 
-<<<<<<< HEAD
     // Filtering / Searching by
     const filteredEmployees = this.filter();
-=======
-        const loader = <div className="lds-dual-ring"></div>;
-        let content = isLoading ? loader : <List delete={this.delete} setEmployee={this.setEmployee} employees={filteredEmployees} />
-        if(!isLoading && !filteredEmployees.length){
-            content = <div className="not-found">Data Not Found</div>
-        }
-        return (
-            <Router>
-            <Switch>
-                <div className="container">
-                    <Route path="/" exact>
-                        <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
-                        {content}
-                    </Route>
-                    <Route path="/page/:page" exact>
-                        <Search searchBy={searchBy} selectOnChange={this.selectOnChange} value={search} getSearch={this.getSearch} />
-                        {content}
-                    </Route>
-                    <Route path="/employee/:id">
-                        <Single employees={employees} data={selected} />
-                    </Route>
-                </div>
-            </Switch>
-            </Router>
-        )
->>>>>>> 3e0f4d8b6ac6b6e97432c6915ffdf2cae81c855b
 
     const loader = <div className="lds-dual-ring"></div>;
     let content = isLoading ? (
       loader
     ) : (
-      <List setEmployee={this.setEmployee} employees={filteredEmployees} />
+      <List
+        delete={this.delete}
+        setEmployee={this.setEmployee}
+        employees={filteredEmployees}
+      />
     );
     if (!isLoading && !filteredEmployees.length) {
       content = <div className="not-found">Data Not Found</div>;
@@ -135,8 +103,22 @@ class App extends Component {
               />
               {content}
             </Route>
+
+            <Route path="/page/:page" exact>
+              <Search
+                searchBy={searchBy}
+                selectOnChange={this.selectOnChange}
+                value={search}
+                getSearch={this.getSearch}
+              />
+              {content}
+            </Route>
+
             <Route path="/employee/:id">
-              <Single employees={employees} data={selected} />
+              <Single
+                updateEmployee={this.updateEmployee}
+                employees={employees}
+              />
             </Route>
           </div>
         </Switch>
