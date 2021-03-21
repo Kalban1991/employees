@@ -11,7 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import Edit from "./edit";
+import Edit from "./Edit";
 
 import "./single.css";
 

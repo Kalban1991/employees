@@ -4,7 +4,7 @@ import Search from "./components/search/Search";
 import "./app.scss";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Single from "./components/single/Single";
-import Edit from "./components/single/edit";
+import Edit from "./components/single/Edit";
 
 class App extends Component {
   constructor() {
