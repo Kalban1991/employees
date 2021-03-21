@@ -11,7 +11,8 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import Edit from "./Edit";
+import Edit from "./edit";
+
 import "./single.css";
 
 class Single extends Component {
@@ -26,33 +27,31 @@ class Single extends Component {
   onClose = () => this.setState({ editMode: false });
 
   render() {
-    console.log("props", this.props);
     const { id } = this.props.match.params;
     const { employees, updateEmployee } = this.props;
     const { editMode } = this.state;
-    let employee = { logins: [] };
-    console.log("our id is ", id);
 
+    let employee = { logins: [] };
     for (let i = 0; i < employees.length; i++) {
-      if (id === employees[i]._id) {
+      if (Number(id) === employees[i].id) {
         employee = employees[i];
         break;
       }
     }
-    console.log("employees id is ", employee);
     let months = {}; // { January: 14, February: 10 }
-    // employee.logins.forEach((login) => {
-    //   const { date } = login;
-    //   const month = moment(date).format("MMM"); // January
-    //   if (months[month]) {
-    //     months[month]++;
-    //   } else {
-    //     months[month] = 1;
-    //   }
-    // });
-    // const data = Object.keys(months).map((month) => {
-    //   return { month, login: months[month] };
-    // });
+    employee.logins.forEach((login) => {
+      const { date } = login;
+      const month = moment(date).format("MMM"); // January
+      if (months[month]) {
+        months[month]++;
+      } else {
+        months[month] = 1;
+      }
+    });
+    const data = Object.keys(months).map((month) => {
+      return { month, login: months[month] };
+    });
+
     return (
       <div className="single">
         {employee.first_name && (
@@ -95,7 +94,7 @@ class Single extends Component {
             <div className="value">{employee.email}</div>
           </li>
         </ul>
-        {/* <div className="chart">
+        <div className="chart">
           <BarChart
             width={800}
             height={300}
@@ -122,7 +121,6 @@ class Single extends Component {
             );
           })}
         </div>
-       */}
       </div>
     );
   }

@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import List from "./components/list/List";
 import Search from "./components/search/Search";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import { Button } from "reactstrap";
-import { v4 as uuidv4 } from "uuid";
-import Single from "./components/single/Single";
-import Add from "./components/single/Add";
 import "./app.scss";
-
-const apiurl = "http://localhost:5000/";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import Single from "./components/single/Single";
+import Edit from "./components/single/edit";
 
 class App extends Component {
   constructor() {
@@ -16,10 +12,8 @@ class App extends Component {
     this.state = {
       employees: [],
       isLoading: false,
-      addMode: false,
       searchBy: "",
       search: "",
-      selected: {},
     };
   }
 
@@ -35,7 +29,7 @@ class App extends Component {
 
   getApiData = () => {
     this.setState({ isLoading: true });
-    fetch(`${apiurl}api/employees`)
+    fetch("https://raw.githubusercontent.com/maratgaip/json/master/people.json")
       .then((json) => json.json())
       .then((employees) => this.setState({ employees, isLoading: false }));
   };
@@ -54,6 +48,7 @@ class App extends Component {
   setEmployee = (selected) => {
     this.setState({ selected });
   };
+
   updateEmployee = (employee) => {
     const employees = this.state.employees.map((emp) => {
       if (emp.id === employee.id) {
@@ -64,17 +59,6 @@ class App extends Component {
     this.setState({ employees });
   };
 
-  addNew = () => this.setState({ addMode: true });
-
-  addModeClose = () => this.setState({ addMode: false });
-
-  addEmployee = (employee) => {
-    const { employees } = this.state;
-    employee.id = uuidv4();
-    employees.unshift(employee);
-    this.setState({ employees });
-  };
-
   filter = () => {
     const { employees, search, searchBy } = this.state;
     const filteredEmployees = employees.filter((employee) => {
@@ -82,6 +66,7 @@ class App extends Component {
         ? employee[searchBy].toLowerCase().includes(search.toLowerCase())
         : true;
     });
+    console.log("filtered ", filteredEmployees);
     return filteredEmployees;
   };
 
@@ -115,20 +100,9 @@ class App extends Component {
                 value={search}
                 getSearch={this.getSearch}
               />
-              <Button
-                onClick={this.addNew}
-                color="primary"
-                className="float-right"
-              >
-                Add Employee
-              </Button>
-              <Add
-                addEmployee={this.addEmployee}
-                onClose={this.addModeClose}
-                addMode={this.state.addMode}
-              />
               {content}
             </Route>
+
             <Route path="/page/:page" exact>
               <Search
                 searchBy={searchBy}
@@ -142,7 +116,6 @@ class App extends Component {
               <Single
                 updateEmployee={this.updateEmployee}
                 employees={employees}
-                data={selected}
               />
             </Route>
           </div>
